@@ -3,9 +3,64 @@
 
 @section('content')
 
+<div id="video-container">
+        <div class="video-overlay"></div>
+        <div class="video-content">
+            <div class="inner">
+              <h1>Demo<em>Blog</em></h1>
+              <p>BLOG</p>
+              <p>Homepage </p>
+                <div class="scroll-icon">
+                    <a class="scrollTo" data-scrollTo="portfolio" href="#"><img src="{{asset('website')}}/img/scroll-icon.png" alt=""></a>
+                </div>    
+            </div>
+        </div>
+        <video autoplay="" loop="" muted>
+        	<source src="{{asset('website')}}/highway-loop.mp4" type="video/mp4" />
+        </video>
+    </div>
+
     <div class="full-screen-portfolio" id="portfolio">
         <div class="container-fluid">
-            <div class="col-md-4 col-sm-6">
+            @foreach ($recentPosts as $post)
+           <div class="col-md-4 col-sm-6">
+                <div class="portfolio-item">
+                <a href="{{route('website.post',['slug'=>$post->slug])}}" ><div class="thumb">
+                        <div class="hover-effect">
+                            <div class="hover-content">
+                                <h1>{{$post->title}} <em>{{$post->user->name}}</em></h1>
+                            
+                            <p>{{$post->catagory->name}}</p>
+                            </div>
+                        </div>
+                        <div class="image">
+                        <img src="{{$post->image}}">
+                        </div>
+                    </div></a>
+                </div>
+            </div>
+            @endforeach
+
+           
+            <div class="row text-center pt-5 border-top">
+                {{$recentPosts->links()}}
+
+           
+                
+          {{--       <div class="col-md-12">
+                    <div class="custom-pagination">
+                        <a href="#">2</a>
+                        <a href="#">3</a>
+                        <a href="#">4</a>
+                        <a href="#">5</a>
+                        <a href="#">6</a>
+                        <span>...</span>
+                        <a href="#">15</a>
+                    </div>
+                </div>
+            </div> --}}
+
+            {{-- <div class="col-md-4 col-sm-6">
                 <div class="portfolio-item">
                     <a href="{{asset('website')}}/img/big_portfolio_item_4.png" data-lightbox="image-1"><div class="thumb">
                         <div class="hover-effect">
@@ -139,7 +194,7 @@
                         </div>
                     </div></a>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 
